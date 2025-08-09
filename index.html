@@ -11,7 +11,7 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
     <!-- Web App Manifest -->
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href='data:application/json;charset=utf-8,{"name":"NJPourDigital","short_name":"NJPour","description":"Your local partner in digital marketing, offering AI-powered mobile apps and strategic content creation to grow your brand.","id":"/","start_url":".","display":"standalone","background_color":"#0d1f3c","theme_color":"#0d1f3c","launch_handler":{"client_mode":"navigate-existing"},"icons":[{"src":"https://i.ibb.co/RkBKfX4m/logo-square.png","sizes":"512x512","type":"image/png","purpose":"any"},{"src":"https://i.ibb.co/RkBKfX4m/logo-square.png","sizes":"512x512","type":"image/png","purpose":"maskable"}]}' />
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -84,6 +84,20 @@
     <div id="app-root">
         <!-- App content will be rendered here by React -->
     </div>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register(
+                'data:application/javascript;base64,self.addEventListener("fetch",()=>{});',
+                { scope: './' }
+            ).then(function(registration) {
+                console.log('Service worker registration successful:', registration);
+            }).catch(function(error) {
+                console.log('Service worker registration failed:', error);
+            });
+        }
+    </script>
 
     <script type="text/babel">
         const { useState, useEffect, useCallback, useMemo } = React;
